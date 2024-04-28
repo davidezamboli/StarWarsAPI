@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:m="clr-namespace:StarWarsAPI.Models"
+             x:Class="StarWarsAPI.Pages.MainPage"
+             x:Name="StarWarsMainPage"
+             Title="People"
+             BindingContext="{x:Reference StarWarsMainPage}">
+
+    <!--<Border Grid.Row="0" 
+        StrokeShape="RoundRectangle"
+        StrokeThickness="0"
+        BackgroundColor="Transparent"
+        HeightRequest="80"
+        Padding="20">
+        <Button x:Name="ButtonSetVisibilityList"
+            Text=""
+            TextColor="White"
+            CornerRadius="22"
+            WidthRequest="100"
+            Padding="0"
+            BackgroundColor="SeaGreen"
+            Clicked="Button_Clicked"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"/>
+    </Border>-->
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto, *">
+            <!-- SearchBar -->
+            <Border Grid.Row="0" 
+                    StrokeShape="RoundRectangle 22"
+                    StrokeThickness="0"
+                    BackgroundColor="Transparent"
+                    Margin="20, 20">
+                <SearchBar x:Name="MainSearchBar"
+                           Placeholder="Search here..."
+                           PlaceholderColor="White"
+                           CancelButtonColor="Red"
+                           BackgroundColor="#9bc9a2"
+                           SearchCommand="{Binding SearchCommand}"
+                           SearchCommandParameter="{Binding Source={x:Reference MainSearchBar}, 
+                                Path=Text}"
+                           TextChanged="MainSearchBar_TextChanged"
+                           />
+            </Border>
+            <!-- People -->
+            <VerticalStackLayout Grid.Row="1" 
+                                 Spacing="10" 
+                                 Padding="10"
+                                 IsVisible="{Binding IsPeopleListVisible}"
+                                 IsEnabled="{Binding IsPeopleListVisible}"
+                                 >
+                <FlexLayout BindableLayout.ItemsSource="{Binding People}"
+                            Wrap="Wrap">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="m:PeopleResult">
+                            <Border FlexLayout.Basis="100%"
+                                    StrokeShape="RoundRectangle"
+                                    StrokeThickness="0"
+                                    Padding="10"
+                                    Margin="10"
+                                    Style="{StaticResource BorderDataStyle}">
+                                <Grid RowDefinitions="Auto, Auto"
+                                      RowSpacing="10">
+                                    <Label Style="{StaticResource LabelNameDataStyle}" 
+                                           Grid.Row="0"
+                                           Text="{Binding name}"
+                                           HorizontalOptions="Center"
+                                           FontSize="18"/>
+                                    <Grid Grid.Row="2"
+                                          ColumnDefinitions="*, *">
+                                        <!--<Label Grid.Column="0"
+                                               Text="Hair"
+                                               TextColor="LightGreen"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               FontAttributes="Bold"/>-->
+                                        <Image Grid.Column="0" 
+                                               Source="hair"
+                                               WidthRequest="25"
+                                               HeightRequest="25"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center">
+                                            <Image.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="{StaticResource IconDataColor}" />
+                                            </Image.Behaviors>
+                                        </Image>
+                                        <HorizontalStackLayout Grid.Column="1"
+                                                               HorizontalOptions="Center"
+                                                               Spacing="2"
+                                                               VerticalOptions="Center"
+                                                               Padding="0, 5">
+                                            <Label Style="{StaticResource LabelTxtBindingDataStyle}"  
+                                                   Text="{Binding hair_color}"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold">
+                                            </Label>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding Source={x:Reference StarWarsMainPage},
+                                                            Path=BindingContext.ShowPeople}" 
+                                                          CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                    <BindableLayout.EmptyView>
+                        <Grid>
+                            <Border StrokeShape="RoundRectangle"
+                                    StrokeThickness="0"
+                                    BackgroundColor="Transparent"
+                                    HeightRequest="200"
+                                    Padding="20">
+                                <Label Text="No person found"
+                                       FontSize="25"
+                                       TextColor="Gray"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       HorizontalTextAlignment="Center">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding IsSearching}"
+                                                     Value="True">
+                                            <Setter Property="Text"
+                                                    Value=""/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Border>
+                        </Grid>
+                                <!--<VerticalStackLayout VerticalOptions="FillAndExpand"
+                                             HorizontalOptions="Fill">
+                                <Border StrokeShape="RoundRectangle"
+                                        StrokeThickness="0"
+                                        HeightRequest="200"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        BackgroundColor="Red">
+                                    <Label Text="No person found"
+                                           FontSize="25"
+                                           TextColor="Gray"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding IsSearching}"
+                                                         Value="True">
+                                                <Setter Property="Text"
+                                                        Value=""/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Border>
+                            </VerticalStackLayout>-->
+                    </BindableLayout.EmptyView>
+                </FlexLayout>
+            </VerticalStackLayout>
+            <!-- ActivityIndicators -->
+            <ActivityIndicator Grid.RowSpan="3" 
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="SeaGreen"/>
+            <ActivityIndicator Grid.RowSpan="3" 
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               IsRunning="{Binding IsSearching}"
+                               IsVisible="{Binding IsSearching}"
+                               Color="SeaGreen"/>
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StarWarsAPI.Popup.PersonDetailPopup"
+             x:Name="PeoplePopup"
+             BindingContext="{x:Reference PeoplePopup}">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto" 
+      Padding="30"
+      RowSpacing="40"
+      Style="{StaticResource BgGridPopupDataStyle}">
+        <Label Grid.Row="0" 
+               Text="{Binding Name}"
+               Style="{StaticResource LabelNameDataStyle}"
+               FontSize="25"
+               FontAttributes="Bold"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"/>
+        <BoxView Grid.Row="1" 
+                 HeightRequest="30"
+                 BackgroundColor="Transparent"/>
+        <Border Grid.Row="2" 
+                StrokeShape="RoundRectangle"
+                StrokeThickness="0"
+                BackgroundColor="Transparent">
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="height"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                    <Image.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{StaticResource IconDataColor}" />
+                    </Image.Behaviors>
+                </Image>
+                <Label HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       TextColor="White"
+                       Text="{Binding Height}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Border Grid.Row="3" 
+                StrokeShape="RoundRectangle"
+                StrokeThickness="0"
+                BackgroundColor="Transparent">
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="mass"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                    <Image.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{StaticResource IconDataColor}" />
+                    </Image.Behaviors>
+                </Image>
+                <Label HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       TextColor="White"
+                       Text="{Binding Mass}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Border Grid.Row="4" 
+                StrokeShape="RoundRectangle"
+                StrokeThickness="0"
+                BackgroundColor="Transparent">
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="birth_year"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                    <Image.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{StaticResource IconDataColor}" />
+                    </Image.Behaviors>
+                </Image>
+                <Label HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       TextColor="White"
+                       Text="{Binding Birth_year}"/>
+            </HorizontalStackLayout>
+        </Border>
+        <Grid.Shadow>
+            <Shadow Brush="Black"
+            Opacity="0.6"
+            Offset="5, 5"
+            Radius="20"/>
+        </Grid.Shadow>
+    </Grid>
+
+
+</mct:Popup>

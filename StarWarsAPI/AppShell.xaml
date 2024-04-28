@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="StarWarsAPI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:StarWarsAPI.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.FlyoutBehavior="Disabled"
+    Title="StarWarsAPI"
+    Shell.BackgroundColor="#101e1d"
+    Style="{StaticResource BaseStyle}">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Shell">
+                <Setter Property="Shell.TitleColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#101e1d"
+                               StatusBarStyle="LightContent"/>
+    </Shell.Behaviors>
+
+    <!--<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate pages:MainPage}"
+        Route="MainPage" />-->
+
+    <TabBar FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent 
+            Title="Person"
+            Icon="person_page"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="MainPage" />
+        <ShellContent 
+            Title="Planet"
+            Icon="planet_page"
+            ContentTemplate="{DataTemplate pages:PlanetPage}"
+            Route="PlanetPage" />
+    </TabBar>
+
+</Shell>

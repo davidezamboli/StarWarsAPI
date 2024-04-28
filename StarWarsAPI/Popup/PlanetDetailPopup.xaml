@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StarWarsAPI.Popup.PlanetDetailPopup"
+             x:Name="PlanetPopup"
+             BindingContext="{x:Reference PlanetPopup}">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" 
+      Padding="30"
+      RowSpacing="40"
+      Style="{StaticResource BgGridPopupDataStyle}">
+        <Label Grid.Row="0" 
+               Text="{Binding Name}"
+               Style="{StaticResource LabelNameDataStyle}"
+               FontSize="25"
+               FontAttributes="Bold"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"/>
+        <BoxView Grid.Row="1" 
+                 HeightRequest="30"
+                 BackgroundColor="Transparent"/>
+        <Grid ColumnDefinitions="*, *"
+              RowDefinitions="*, *, *"
+              RowSpacing="10"
+              Grid.Row="2"
+              ColumnSpacing="5">
+            <HorizontalStackLayout Grid.Column="0"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand"
+                                   Spacing="10">
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="5">
+                    <Label Grid.Column="0" 
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           FontSize="18"
+                           TextColor="White"
+                           Text="{Binding Rotation_period}"/>
+                    <Image Grid.Column="1" 
+                           Source="rotation"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start">
+                        <Image.Behaviors>
+                            <mct:IconTintColorBehavior TintColor="{StaticResource IconDataColor}" />
+                        </Image.Behaviors>
+                    </Image>
+                </Grid>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="EndAndExpand"
+                                   Spacing="10">
+                <Label HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       TextColor="White"
+                       Text="{Binding Orbital_period}"/>
+                <Image Source="orbit"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                    <Image.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{StaticResource IconDataColor}" />
+                    </Image.Behaviors>
+                </Image>
+            </HorizontalStackLayout>
+        </Grid>
+        <Border Grid.Row="3" 
+                StrokeShape="RoundRectangle"
+                StrokeThickness="0"
+                BackgroundColor="Transparent">
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="group"
+                       WidthRequest="30"
+                       HeightRequest="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End">
+                    <Image.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{StaticResource IconDataColor}" />
+                    </Image.Behaviors>
+                </Image>
+                <Label HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="18"
+                       TextColor="White"
+                       Text="{Binding Population}"/>
+            </HorizontalStackLayout>
+        </Border>
+
+        <Border Grid.Row="4" 
+                StrokeShape="RoundRectangle"
+                StrokeThickness="0"
+                BackgroundColor="Transparent">
+            <ScrollView 
+                        HeightRequest="80"
+                        Orientation="Horizontal"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalScrollBarVisibility="Never">
+                <FlexLayout BindableLayout.ItemsSource="{Binding TerrainList}"
+                                JustifyContent="SpaceEvenly"
+                                AlignItems="Center"
+                                Wrap="NoWrap">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Label HorizontalOptions="Start"
+                                   VerticalOptions="Center"
+                                   FontSize="18"
+                                   TextColor="White"
+                                   Padding="0"
+                                   Text="{Binding .}"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+            </ScrollView>
+        </Border>
+        <Grid.Shadow>
+            <Shadow Brush="Black"
+                    Opacity="0.6"
+                    Offset="5, 5"
+                    Radius="20"/>
+        </Grid.Shadow>
+    </Grid>
+
+</mct:Popup>
